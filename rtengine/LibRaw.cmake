@@ -51,7 +51,7 @@ if(PROCESS_RESULT AND NOT PROCESS_RESULT EQUAL 0)
     message(FATAL_ERROR "Could not generate LibRaw configuration script")
 endif()
 execute_process(
-    COMMAND "${SHELL}" -l -c "./configure ${CONFIGURE_FLAGS}"
+    COMMAND "${SHELL}" -c "./configure ${CONFIGURE_FLAGS}"
     WORKING_DIRECTORY "${LIBRAW_DIR}"
     RESULT_VARIABLE PROCESS_RESULT
     COMMAND_ECHO STDOUT
@@ -73,14 +73,14 @@ else()
     # If not using Makefiles, set number of jobs equal to logical processors
     # count. Not necessary for make because of the jobserver.
     execute_process(
-        COMMAND "${SHELL}" -l -c "nproc"
+        COMMAND "${SHELL}" -c "nproc"
         OUTPUT_VARIABLE LOGICAL_PROCESSORS
         RESULT_VARIABLE PROCESS_RESULT
         ERROR_QUIET
     )
     if(PROCESS_RESULT AND NOT PROCESS_RESULT EQUAL 0)
         execute_process(
-            COMMAND "${SHELL}" -l -c "sysctl -n hw.ncpu"
+            COMMAND "${SHELL}" -c "sysctl -n hw.ncpu"
             OUTPUT_VARIABLE LOGICAL_PROCESSORS
             RESULT_VARIABLE PROCESS_RESULT
             ERROR_QUIET
@@ -88,7 +88,7 @@ else()
     endif()
     if(PROCESS_RESULT AND NOT PROCESS_RESULT EQUAL 0)
         execute_process(
-            COMMAND "${SHELL}" -l -c "getconf _NPROCESSORS_ONLN"
+            COMMAND "${SHELL}" -c "getconf _NPROCESSORS_ONLN"
             OUTPUT_VARIABLE LOGICAL_PROCESSORS
             RESULT_VARIABLE PROCESS_RESULT
             ERROR_QUIET
@@ -107,7 +107,7 @@ endif()
 add_custom_command(
     OUTPUT "${LIBRAW_PHANTOM_FILE}" "${LIBRAW_LIB_DIR}/.libs/libraw_r.a"
     COMMAND cp -p -R "${CMAKE_CURRENT_SOURCE_DIR}/libraw" ..
-    COMMAND "${SHELL}" -l -c "${LIBRAW_MAKE_COMMAND} ${LIBRAW_MAKE_FLAGS}"
+    COMMAND "${SHELL}" -c "${LIBRAW_MAKE_COMMAND} ${LIBRAW_MAKE_FLAGS}"
     COMMENT "Building LibRaw"
     WORKING_DIRECTORY libraw
     VERBATIM
