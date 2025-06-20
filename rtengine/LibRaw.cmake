@@ -42,7 +42,7 @@ if(PROCESS_RESULT AND NOT PROCESS_RESULT EQUAL 0)
     message(FATAL_ERROR "Could not copy LibRaw files into build directory")
 endif()
 execute_process(
-    COMMAND "${SHELL}" -l -c "autoreconf -v --install"
+    COMMAND "${SHELL}" -c "libtoolize --verbose --force --install --copy --warnings=all && autoreconf --verbose --install --warnings=all"
     WORKING_DIRECTORY "${LIBRAW_DIR}"
     RESULT_VARIABLE PROCESS_RESULT
     COMMAND_ECHO STDOUT
