@@ -53,6 +53,7 @@ jobs:
             ninja:p
             gtkmm3:p
             lcms2:p
+            libtool:p
             fftw:p
             lensfun:p
             libiptcdata:p
